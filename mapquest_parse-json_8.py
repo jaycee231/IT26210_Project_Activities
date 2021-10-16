@@ -17,7 +17,7 @@ while True:
     if dest == "quit" or dest == "q":
         break
 
-    max_routes = input("Enter how many routes to return? ")
+    max_routes = input("Enter max route: ")
     if max_routes == "quit" or max_routes == "q":
         break
     print("Select a type of route to use: ")
@@ -27,7 +27,7 @@ while True:
     print("4. Bicycle")
     print("5. Exit")
     
-    route = input("Enter name of the route: ")
+    route = input("Enter number of the route: ")
     if route == '1':
         url = main_api + urllib.parse.urlencode({"key":key, "from":orig, "to":dest, "maxRoutes":max_routes, "routeType": 'fastest'})
     elif route == '2':
