@@ -24,7 +24,7 @@ while True:
 # print(json_data)
     print("URL: " + (url))
     # print("Second URL: " + (second_url))
-    json_data = requests.post(url).json()
+    json_data = requests.get(url).json()
     # json_data2 = requests.get(second_url).json()
     json_status = json_data["info"]["statuscode"]
 
@@ -54,27 +54,27 @@ while True:
             # print(json_data["route"]["legs"][0]["maneuvers"]["transportMode"])
             
             for each in json_data["route"]["legs"][0]["maneuvers"]:
-                print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
                 each["transportMode"] = 'AUTO'
-                print("Time: " + str("{:.2f}".format(each["time"])))
+                print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
+                print("Time: " + str("{:.2f}".format((each["time"]) / 60)  + " minutes"))
                 print("Using " + each["transportMode"] + " as a means of transportation.\n")
             break
         elif transportation == '2':
             for each in json_data["route"]["legs"][0]["maneuvers"]:
                 each["transportMode"] = 'WALKING'
 
-                if each["transportMode"] == 'WALKING':
-                    for transport in json_data["route"]["legs"][0]["maneuvers"]:
-                        print((transport["narrative"]) + " (" + str("{:.2f}".format((transport["distance"])*1.61) + " km)"))
+                # if each["transportMode"] == 'WALKING':
+                for transport in json_data["route"]["legs"][0]["maneuvers"]:
+                    print((transport["narrative"]) + " (" + str("{:.2f}".format((transport["distance"])*1.61) + " km)"))
                 # each["transportMode"] = 'WALKING'
-                        # print("Time: " + str("{:.2f}".format(transport["time"])))
-                        print("Using " + each["transportMode"] + " as a means of transportation.\n")
+                    print("Time: " + str("{:.2f}".format((transport["time"]) / 60)  + " minutes"))
+                    print("Using " + each["transportMode"] + " as a means of transportation.\n")
             break
         elif transportation == '3':
             for each in json_data["route"]["legs"][0]["maneuvers"]:
-                print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
                 each["transportMode"] = 'BICYCLE'
-                print("Time: " + str("{:.2f}".format(each["time"])))
+                print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
+                print("Time: " + str("{:.2f}".format((each["time"]) / 60)  + " minutes"))
                 print("Using " + each["transportMode"] + " as a means of transportation.\n")
             break
         else:
