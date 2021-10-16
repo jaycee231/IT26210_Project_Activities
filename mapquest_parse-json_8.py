@@ -2,11 +2,8 @@ import urllib.parse
 import requests
 
 # 3Rguwll95IyFGzeG9Rhvf3BJdmKIECHU
-# main_api =  "https://www.mapquestapi.com/directions/v2/route?"
 main_api = "http://www.mapquestapi.com/directions/v2/alternateroutes?"
-# secondary_api = "http://www.mapquestapi.com/directions/v2/alternateroutes?"
-# orig = "Washington, D.C."
-# dest = "Baltimore, Md"
+
 key = "3Rguwll95IyFGzeG9Rhvf3BJdmKIECHU"
 
 while True:
@@ -16,10 +13,12 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
-
-    max_routes = input("Enter max route: ")
-    if max_routes == "quit" or max_routes == "q":
-        break
+    try:
+        max_routes = input("Enter max route: ")
+        if max_routes == "quit" or max_routes == "q":
+            break
+    except:
+        print("Enter numbers only!")
     print("Select a type of route to use: ")
     print("1. Fastest")
     print("2. Shortest")
@@ -39,7 +38,7 @@ while True:
     elif route == '5':
         break
     else:
-        print("Enter number from 1 - 4 only")
+        print("Enter number from 1 - 5 only")
         break
     # json_data = requests.get(url).json()
 # print(json_data)
@@ -67,17 +66,22 @@ while True:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
             print("Time: " + str("{:.2f}".format((each["time"]) / 60)  + " minutes"))
             print("Using " + each["transportMode"] + " as a means of transportation.\n")
-        
-        alternative = input("Do you want to know an alternative route?(Y/N) ")
-        if alternative == 'Y' or alternative == 'y':
-            for alternativeRoute in json_data["route"]["alternateRoutes"]:
-                for alternatives in json_data["route"]["legs"][0]["maneuvers"]:
-                    print((alternatives["narrative"])  + " (" + str("{:.2f}".format((alternatives["distance"])*1.61) + " km)"))
-            break
-        if alternative == 'N' or alternative == 'n':
-            break
+        if max_routes == '3' or route == 'pedestrian' or route == 'bicycle':
+            try:
+                alternative = input("Do you want to know an alternative route?(Y/N) ")
+                if alternative == 'Y' or alternative == 'y':
+                    for alternativeRoute in json_data["route"]["alternateRoutes"]:
+                        for alternatives in json_data["route"]["legs"][0]["maneuvers"]:
+                            print((alternatives["narrative"])  + " (" + str("{:.2f}".format((alternatives["distance"])*1.61) + " km)"))
+                    break
+                if alternative == 'N' or alternative == 'n':
+                    break
+            except:
+                print("\nThere's no alternative routes\n")
+            
         print("=============================================\n")
-    
+        break
+
     elif json_status == 402:
         print("**********************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
