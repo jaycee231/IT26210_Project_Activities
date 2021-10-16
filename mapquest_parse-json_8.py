@@ -51,10 +51,10 @@ while True:
         print("Directions from " + (orig) + " to " + (dest))
         print("Trip Duration: " + (json_data["route"]["formattedTime"]))
         print("Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"]) * 1.61)))
-        print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78)))
+        if ["routeType"] == 'fastest' or ["routeType"] == 'shortest':
+            print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"]) * 3.78)))
         print("Route Type: " + (json_data["route"]["options"]["routeType"]))
         print("Max Routes: " + (json_data["route"]["maxRoutes"]))
-        # print("Max Routes: " + (json_data["route"]["alternateRoutes"]["route"]))
         print("=============================================")
 
         for each in json_data["route"]["legs"][0]["maneuvers"]:
