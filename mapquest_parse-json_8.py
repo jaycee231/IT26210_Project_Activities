@@ -1,6 +1,14 @@
 import urllib.parse
 import requests
 import tkinter  as tk
+from tkinter import *
+root = Tk()
+root.title("WELCOME TO MAPQUEST API")
+  
+w = Label(root, width =50, height = 50 ,text='Mapquest API applicaiton!',font=("Arial", 25))
+w.pack()
+root.mainloop()
+
 
 # 3Rguwll95IyFGzeG9Rhvf3BJdmKIECHU
 # main_api =  "https://www.mapquestapi.com/directions/v2/route?"
