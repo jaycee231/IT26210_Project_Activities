@@ -4,7 +4,7 @@ import tkinter  as tk
 
 # 3Rguwll95IyFGzeG9Rhvf3BJdmKIECHU
 # main_api =  "https://www.mapquestapi.com/directions/v2/route?"
-main_api = "http://www.mapquestapi.com/directions/v2/optimizedroutes?"
+main_api = "http://www.mapquestapi.com/directions/v2/alternateroutes?"
 # secondary_api = "http://www.mapquestapi.com/directions/v2/alternateroutes?"
 # orig = "Washington, D.C."
 # dest = "Baltimore, Md"
